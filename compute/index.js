@@ -153,6 +153,7 @@ var userProtocol = {
                     message: 'Not in any room.'
                 }
             });
+            return;
         }
 
         var room = rooms[data.token];
@@ -165,6 +166,7 @@ var userProtocol = {
                     message: 'Could not find that room.'
                 }
             });
+            return;
         }
 
         room.remove(user);

@@ -101,7 +101,7 @@ _.extend(Room.prototype, {
                         max: self.game.maxPlayers,
                         min: self.game.minPlayers
                     }
-                })
+                });
             } else {
                 // nothing?
             }
