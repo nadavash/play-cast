@@ -87,13 +87,6 @@
 		<script>
 
 			$(function() {
-				/* check cover height */
-				var contentH = $('body').height();
-				var windowH = $(window).height();
-				if (contentH > windowH) {
-					$('.mastfoot').css('position', 'inherit');
-				}
-
 				StateManager.goto({
 					type: 'start'
 				});
