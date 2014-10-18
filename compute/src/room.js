@@ -96,7 +96,13 @@ _.extend(Room.prototype, {
                 type: 'left'
             });
 
-            if (count > self.game.maxPlayers || count < self.game.minPlayers) {
+            if (count === 0 && self.spectator) {
+                Log.info('alerting spectator: left');
+                self.spectator.emit('state', {
+                    type: 'left'
+                });
+            } else if (count > self.game.maxPlayers || count < self.game.minPlayers) {
+                Log.info('alerting all: waiting');
                 self.broadcast('state', {
                     type: 'waiting',
                     data: {

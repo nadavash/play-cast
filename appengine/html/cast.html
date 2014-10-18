@@ -28,7 +28,6 @@
 			<div class="site-wrapper-inner">
 
 				<div class="cover-container">
-					<img class="home-return" src="home.png" alt="home"></img>
 
 					<div class="inner cover">
 
@@ -60,11 +59,27 @@
 		<script src="javascript/states/tictactoe.js"></script>
 		<script src="javascript/states/join.js"></script>
 		<script src="javascript/states/wait.js"></script>
+		<script src="javascript/alert.js"></script>
+
+		<script>
+			window.Start = {
+
+				init: function() {
+					setTimeout(function() {
+						$('.cover').html('');
+					}, 300);
+				},
+
+				cleanup: function() {
+
+				}
+			};
+		</script>
 
 		<script src="javascript/StateManager.js"></script>
 		<script src="javascript/ConnectionManager.js"></script>
 
-		<script src="http://146.148.56.132:3000/socket.io/socket.io.js"></script>
+		<script src="http://localhost:3000/socket.io/socket.io.js"></script>
 		<script>
 			function getParameterByName(name) {
 			    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -73,8 +88,10 @@
 			    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 			}
 
-			var roomId = getParameterByName('roomId');
-			ConnectionManager.joinRoom(roomId);
+			$(function() {
+				var roomId = getParameterByName('roomId');
+				ConnectionManager.watchRoom(roomId);
+			});
 		</script>
 	</body>
 </html>
