@@ -1,0 +1,16 @@
+html, body {
+	background-image: url("../img/Felt-Green.jpg");
+	background-size: 100%;
+}
+
+.cover-heading {
+	margin-bottom: 40px;
+}
+
+span {
+	margin: 0;
+}
+
+.windows8 {
+	margin: 20px auto;
+}
