@@ -1,5 +1,5 @@
 var _ = require('lodash'),
-    Log = require('../Logger.js');
+    Log = require('../logger.js');
 
 module.exports = Numberwang;
 
