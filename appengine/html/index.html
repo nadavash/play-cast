@@ -58,15 +58,14 @@
 		<script type="text/javascript">
 			$(function() {
 				$('.btn-join').click(function() {
-					wipe();
+					wipe('/join');
 				});
 				$('.btn-host').click(function() {
-					// wipe('host.html');
+					wipe('/host');
 				});
 
-				function wipe() {
-					// window.location.href = "player-wait.html";
-					$('.cover').load('/join');
+				function wipe(content) {
+					$('.cover').load(content);
 				}
 			});
 		</script>

@@ -7,10 +7,11 @@ html, body {
 	margin-bottom: 40px;
 }
 
-span {
-	margin: 0;
+.btn-join {
+	margin-right: 20px;
 }
 
+/* spinning loader */
 .windows8 {
 	margin: 20px auto;
 }
