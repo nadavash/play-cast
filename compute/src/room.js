@@ -51,23 +51,25 @@ _.extend(Room.prototype, {
 
             self.game.setUsers(Object.keys(self.users));
 
-            // let user know they are in
-            user.emit('state', {
-                type: 'joined',
-                data: {
-                    message: 'Room joined.',
-                    token: self.token,
-                    game: self.game.name
-                }
-            });
+            var count = self.game.players.length;
 
-            // broadcast new room size
-            self.broadcast('update', {
-                type: 'users',
-                data: {
-                    count: Object.keys(self.users).length
-                }
-            });
+            if (count > self.game.maxPlayers || count < self.game.minPlayers) {
+                self.broadcast('state', {
+                    type: 'waiting',
+                    data: {
+                        count: count,
+                        max: self.game.maxPlayers,
+                        min: self.game.minPlayers
+                    }
+                })
+            } else {
+                self.broadcast('state', {
+                    type: 'joined',
+                    data: {
+                        game: self.game.name
+                    }
+                })
+            }
         });
     },
 
@@ -85,22 +87,20 @@ _.extend(Room.prototype, {
 
             self.game.setUsers(Object.keys(self.users));
 
-            // let user know they left
-            user.emit('state', {
-                type: 'left',
-                data: {
-                    message: 'Room left.',
-                    token: self.token
-                }
-            });
+        var count = self.game.players.length;
 
-            // broadcast new room size
-            self.broadcast('update', {
-                type: 'users',
-                data: {
-                    count: Object.keys(self.users).length
-                }
-            });
+            if (count > self.game.maxPlayers || count < self.game.minPlayers) {
+                self.broadcast('state', {
+                    type: 'waiting',
+                    data: {
+                        count: count,
+                        max: self.game.maxPlayers,
+                        min: self.game.minPlayers
+                    }
+                })
+            } else {
+                // nothing?
+            }
         });
     }
 });

@@ -52,35 +52,13 @@
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 		<script src="javascript/ie10-viewport-bug-workaround.js"></script>
 
-		<script src="javascript/numberwang.js"></script>
-
-		<script type="text/javascript">
-			$(function() {
-				$('.btn-join').click(function() {
-					wipe('/join');
-				});
-				$('.btn-host').click(function() {
-					wipe('/host', function() {
-						$('.row').click(function() {
-							var game = $(this).attr('data-game');
-							console.log('game = ' + game);
-							gameSelect(game);
-						});
-					});
-				});
-
-				function wipe(content, done) {
-					$('.cover').load(content, done);
-				}
-			});
-		</script>
-
 		<!-- states -->
 		<script src="javascript/states/numberwang.js"></script>
 		<script src="javascript/states/tictactoe.js"></script>
 		<script src="javascript/states/pick.js"></script>
 		<script src="javascript/states/start.js"></script>
 		<script src="javascript/states/join.js"></script>
+		<script src="javascript/states/wait.js"></script>
 
 		<script src="javascript/StateManager.js"></script>
 		<script src="javascript/ConnectionManager.js"></script>
