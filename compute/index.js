@@ -57,7 +57,7 @@ io.on('connection', function(user) {
             }
 
             // game over
-            if (this.finished) {
+            if (room.game.finished) {
                 room.broadcast('state', {
                     type: 'gameover',
                     data: state

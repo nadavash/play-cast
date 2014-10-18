@@ -2,6 +2,8 @@
 
     window.Tictactoe = {
         init: function() {
+            var socket = ConnectionManager.getUser();
+
             $('.cover').load('/tictactoe', function() {
                 socket.on('update', stateHandler);
 
@@ -12,6 +14,8 @@
         },
 
         cleanup: function() {
+            var socket = ConnectionManager.getUser();
+
             socket.off('update', stateHandler);
             $('.cover').html('');
         }

@@ -17,10 +17,11 @@ function Room(host, game) {
     this.add(host);
 
     this.host.emit('state', {
-        type: 'joined',
+        type: 'hosted',
         data: {
             message: "Hosting room.",
-            token: this.token
+            token: this.token,
+            game: this.game.name
         }
     });
 }
@@ -55,7 +56,8 @@ _.extend(Room.prototype, {
                 type: 'joined',
                 data: {
                     message: 'Room joined.',
-                    token: self.token
+                    token: self.token,
+                    game: self.game.name
                 }
             });
 
