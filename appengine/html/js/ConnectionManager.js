@@ -29,13 +29,13 @@
             });
         },
 
-        joinRoom: function(room, callback) {
+        joinRoom: function(r, callback) {
             socket = io.connect(url);
             StateManager.init(socket);
             socket.emit('message', {
                 type: 'join',
                 data: {
-                    token: room
+                    token: r
                 }
             });
             socket.on('state', function handler(evt) {
@@ -43,7 +43,7 @@
                     socket.off('state', handler);
                     isLoggedIn = true;
                     isHost = false;
-                    room = evt.data.token;
+                    room = r;
                     callback && callback(evt.data);
                 }
             });
