@@ -61,7 +61,27 @@
 		<script type="text/javascript">
 			$(function() {
 				$('.btn-join').click(function() {
-					wipe('/join');
+					wipe('/join', function() {
+
+						$('.cover button').click(function() {
+							var code = $('.cover input').val();
+
+							socket = io.connect('http://localhost:3000');
+							socket.emit('message', {
+								type: 'join',
+								data: {
+									token: code
+								}
+							});
+
+							socket.on('state', function(evt) {
+								if (evt.type === 'joined') {
+									gameSelect(evt.data.game, false)
+								}
+							});
+						});
+
+					});
 				});
 				$('.btn-host').click(function() {
 					wipe('/host', function() {
@@ -69,7 +89,7 @@
 						$('.row').click(function() {
 							var game = $(this).attr('data-game');
 							console.log('game = ' + game);
-							gameSelect(game);
+							gameSelect(game, true);
 						});
 					});
 
@@ -84,14 +104,17 @@
 
 		<script src="http://localhost:3000/socket.io/socket.io.js"></script>
 		<script>
-			function gameSelect(gameName) {
-				socket = io.connect('http://localhost:3000')
-				socket.emit('message', {
-					type: 'host',
-					data: {
-						game: gameName
-					}
-				});
+			function gameSelect(gameName, host) {
+
+				if (host) {
+					socket = io.connect('http://localhost:3000')
+					socket.emit('message', {
+						type: 'host',
+						data: {
+							game: gameName
+						}
+					});
+				}
 
 				var obj = {
 					'tictactoe': window.Tictactoe,

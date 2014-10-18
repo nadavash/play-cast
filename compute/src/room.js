@@ -55,7 +55,8 @@ _.extend(Room.prototype, {
                 type: 'joined',
                 data: {
                     message: 'Room joined.',
-                    token: self.token
+                    token: self.token,
+                    game: self.game.name
                 }
             });
 

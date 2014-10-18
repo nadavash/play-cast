@@ -10,6 +10,7 @@ function Numberwang() {
 
     this.maxPlayers = 1;
     this.minPlayers = 1;
+    this.name = 'numberwang';
 }
 
 _.extend(Numberwang.prototype, {

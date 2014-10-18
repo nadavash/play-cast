@@ -13,6 +13,7 @@ function TicTacToe() {
 	this.minPlayers = 2;
 	this.players = [];
 	this.finished = false;
+	this.name = 'tictactoe';
 
 	this.count = 0;
 }
