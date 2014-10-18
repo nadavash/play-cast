@@ -1,6 +1,6 @@
 (function() {
 
-    var url = 'http://146.148.56.132:3000/';
+    var url = 'http://localhost:3000/';
 
     var socket = null,
         isLoggedIn = false,
@@ -44,6 +44,25 @@
                     room = r;
                     callback && callback(evt.data);
                 }
+            });
+        },
+
+        watchRoom: function(r, callback) {
+            socket = io.connect(url);
+            StateManager.init(socket);
+            console.log('hi', socket, r);
+
+            socket.emit('watch', {
+                data: {
+                    room: r
+                }
+            });
+
+            socket.once('state', function(evt) {
+                isLoggedIn = true;
+                isHost = false;
+                room = r;
+                callback && callback(evt.data);
             });
         },
 

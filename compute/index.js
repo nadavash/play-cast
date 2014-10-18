@@ -40,6 +40,7 @@ io.on('connection', function(user) {
                     message: 'Could not find that room.'
                 }
             });
+            return;
         }
 
         Log.info('user ' + user.id + ' does move:', data);
@@ -74,6 +75,8 @@ io.on('connection', function(user) {
 
     user.on('watch', function(evt) {
         var room = rooms[evt.data.room];
+
+        Log.info(evt.data, room, rooms);
 
         if (!room) {
 

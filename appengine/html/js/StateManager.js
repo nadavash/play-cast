@@ -10,9 +10,9 @@
             socket.on('state', function(evt) {
                 window.StateManager.goto(evt);
             });
-            
+
             socket.on('message', function(evt) {
-                if (evt.type == error) {
+                if (evt.type === 'error') {
                     customAlert('Error!', evt.data.message);
                 }
             });
