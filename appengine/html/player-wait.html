@@ -27,11 +27,33 @@
 
 				<div class="cover-container">
 
-					<div class="test inner cover">
-						<h1 class="cover-heading">Welcome to PlayCast.</h1>
+					<div class="inner cover">
+						<h1 class="cover-heading">Welcome to PlayCast.
+						</h1>
+						<div class="windows8">
+							<div class="wBall" id="wBall_1">
+							<div class="wInnerBall">
+							</div>
+							</div>
+							<div class="wBall" id="wBall_2">
+							<div class="wInnerBall">
+							</div>
+							</div>
+							<div class="wBall" id="wBall_3">
+							<div class="wInnerBall">
+							</div>
+							</div>
+							<div class="wBall" id="wBall_4">
+							<div class="wInnerBall">
+							</div>
+							</div>
+							<div class="wBall" id="wBall_5">
+							<div class="wInnerBall">
+							</div>
+							</div>
+						</div>
 
-						<button type="button" class="btn-join btn btn-default btn-lg">Join</button>
-						<button type="button" class="btn-host btn btn-default btn-lg">Host</button>
+						<p class="lead">Waiting for players to join...</p>
 					</div>
 
 					<div class="mastfoot">
@@ -54,21 +76,6 @@
 		<script src="javascript/docs.min.js"></script>
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 		<script src="javascript/ie10-viewport-bug-workaround.js"></script>
-
-		<script type="text/javascript">
-			$(function() {
-				$('.btn-join').click(function() {
-					wipe();
-				});
-				$('.btn-host').click(function() {
-					// wipe('host.html');
-				});
-
-				function wipe() {
-					$('.test').load('join.html');
-				}
-			});
-		</script>
 
 	</body>
 </html>
