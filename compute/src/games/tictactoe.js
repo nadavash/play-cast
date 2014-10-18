@@ -54,8 +54,10 @@ _.extend(TicTacToe.prototype, {
 	checkWinner: function() {
 		var gameBoard = this.board;
 
+		console.log(gameBoard);
+
 		// check horizontal
-		for (var i = 0; i < gameBoard.size; ++i) {
+		for (var i = 0; i < gameBoard.length; ++i) {
 			if (gameBoard[i][0] === gameBoard[i][1] &&
 				gameBoard[i][0] === gameBoard[i][2] &&
 				gameBoard[i][0] !== undefined) {
@@ -64,10 +66,10 @@ _.extend(TicTacToe.prototype, {
 		}
 
 		// check vertical
-		for (var i = 0; i < gameBoard.size; ++i) {
+		for (var i = 0; i < gameBoard.length; ++i) {
 			if (gameBoard[0][i] === gameBoard[1][i] &&
 				gameBoard[0][i] === gameBoard[2][i] &&
-				gameBoard[0][i] != undefined) {
+				gameBoard[0][i] !== undefined) {
 				return this.players[gameBoard[0][i]];
 			}
 		}

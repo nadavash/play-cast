@@ -1,6 +1,6 @@
 (function() {
 
-    var url = 'http://localhost:3000';
+    var url = 'http://146.148.56.132:3000/';
 
     var socket = null,
         isLoggedIn = false,
@@ -18,9 +18,8 @@
                     game: game
                 }
             });
-            socket.on('state', function handler(evt) {
+            socket.once('state', function handler(evt) {
                 if (evt.type === 'hosted') {
-                    socket.off('state', handler);
                     isLoggedIn = true;
                     isHost = true;
                     room = evt.data.token;
@@ -29,21 +28,20 @@
             });
         },
 
-        joinRoom: function(room, callback) {
+        joinRoom: function(r, callback) {
             socket = io.connect(url);
             StateManager.init(socket);
             socket.emit('message', {
                 type: 'join',
                 data: {
-                    token: room
+                    token: r
                 }
             });
-            socket.on('state', function handler(evt) {
+            socket.once('state', function handler(evt) {
                 if (evt.type === 'joined') {
-                    socket.off('state', handler);
                     isLoggedIn = true;
                     isHost = false;
-                    room = evt.data.token;
+                    room = r;
                     callback && callback(evt.data);
                 }
             });

@@ -47,11 +47,13 @@
                     throw "oh";
             }
 
+            console.log('going to', state);
+
             state = states[state];
 
             if (!state) throw "uhoh";
             if (oldState) oldState.cleanup();
-            state.init();
+            state.init(evt.data);
             oldState = state;
         }
     }

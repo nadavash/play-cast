@@ -1,5 +1,6 @@
 var _ = require('lodash'),
-    io = require('./io.js');
+    io = require('./io.js'),
+    Log = require('./logger.js');
 
 module.exports = Room;
 
@@ -9,7 +10,7 @@ module.exports = Room;
  * @param {Socket} host
  */
 function Room(host, game) {
-    this.token = _.uniqueId('r');
+    this.token = uniqueId('r');
     this.host = host;
     this.game = game;
 
@@ -54,10 +55,12 @@ _.extend(Room.prototype, {
             var count = self.game.players.length;
 
             if (count > self.game.maxPlayers || count < self.game.minPlayers) {
+                Log.warn(self.token);
                 self.broadcast('state', {
                     type: 'waiting',
                     data: {
                         count: count,
+                        room: self.token,
                         max: self.game.maxPlayers,
                         min: self.game.minPlayers
                     }
@@ -86,21 +89,29 @@ _.extend(Room.prototype, {
         user.leave(this.token, function() {
 
             self.game.setUsers(Object.keys(self.users));
+            var count = self.game.players.length;
 
-        var count = self.game.players.length;
+            user.emit('state', {
+                type: 'left'
+            });
 
             if (count > self.game.maxPlayers || count < self.game.minPlayers) {
                 self.broadcast('state', {
                     type: 'waiting',
                     data: {
                         count: count,
+                        room: self.token,
                         max: self.game.maxPlayers,
                         min: self.game.minPlayers
                     }
-                })
+                });
             } else {
                 // nothing?
             }
         });
     }
 });
+
+function uniqueId() {
+    return Math.random().toString(16).substr(2, 5);
+}

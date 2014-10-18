@@ -2,9 +2,9 @@
 
     window.Wait = {
 
-        init: function() {
+        init: function(data) {
             $('.cover').load('/wait', function() {
-
+                $('.cover .code').text(data.room);
             });
         },
 
