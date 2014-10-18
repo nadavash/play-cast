@@ -11,6 +11,7 @@ func init() {
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/join", joinHandler)
 	http.HandleFunc("/host", hostHandler)
+	http.HandleFunc("/numberwang", numberHandler);
 }
 
 func displayTemplate(htmlTmp string, w http.ResponseWriter, r *http.Request) {
@@ -31,4 +32,8 @@ func joinHandler(w http.ResponseWriter, r *http.Request) {
 
 func hostHandler(w http.ResponseWriter, r *http.Request) {
 	displayTemplate("html/host.html", w, r)
+}
+
+func numberHandler(w http.ResponseWriter, r *http.Request) {
+	displayTemplate("html/numberwang.html", w, r)
 }
