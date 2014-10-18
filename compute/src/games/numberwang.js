@@ -8,6 +8,7 @@ function Numberwang() {
     this.finished = false;
     this.lastGuess = null;
 
+    this.players = [];
     this.maxPlayers = 1;
     this.minPlayers = 1;
     this.name = 'numberwang';
@@ -30,8 +31,8 @@ _.extend(Numberwang.prototype, {
         callback(null, this.getState());
     },
 
-    setUsers: function() {
-
+    setUsers: function(players) {
+        this.players = players;
     },
 
     /**

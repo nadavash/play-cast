@@ -26,6 +26,10 @@
                     state = 'join';
                     break;
 
+                case 'waiting': // waiting for right amount of players
+                    state = 'wait';
+                    break;
+
                 case 'hosted': // hosting a game
                 case 'joined': // joined a game
                     state = evt.data.game;
@@ -56,6 +60,7 @@
         'start': window.Start,
         'pick': window.Pick,
         'join': window.Join,
+        'wait': window.Wait,
         'tictactoe': window.Tictactoe,
         'numberwang': window.Numberwang
     }

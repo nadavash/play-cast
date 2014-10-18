@@ -14,6 +14,7 @@ func init() {
 	http.HandleFunc("/numberwang", numberHandler)
 	http.HandleFunc("/tictactoe", tictactoeHandler)
 	http.HandleFunc("/start", startHandler)
+	http.HandleFunc("/wait", waitHandler)
 }
 
 func displayTemplate(htmlTmp string, w http.ResponseWriter, r *http.Request) {
@@ -46,4 +47,8 @@ func tictactoeHandler(w http.ResponseWriter, r *http.Request) {
 
 func startHandler(w http.ResponseWriter, r *http.Request) {
 	displayTemplate("html/start.html", w, r)
+}
+
+func waitHandler(w http.ResponseWriter, r *http.Request) {
+	displayTemplate("html/player-wait.html", w, r)
 }

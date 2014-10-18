@@ -71,6 +71,13 @@ io.on('connection', function(user) {
             })
         });
     });
+
+    user.on('disconnect', function() {
+        Log.warn('user ' + user.id + ' disconnected');
+        delete users[user.id];
+        userRoomMap[user.id].remove(user);
+        delete userRoomMap[user.id];
+    });
 });
 
 var userProtocol = {
