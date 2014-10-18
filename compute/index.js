@@ -79,6 +79,7 @@ var userProtocol = {
      * Start hosting a game
      */
     'host': function(user, data) {
+        data = data || {};
         Log.info('user ' + user.id + ' wants host:', data.game);
 
         var Game = games[data.game];
