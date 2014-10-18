@@ -48,6 +48,8 @@ _.extend(Room.prototype, {
         // add user
         user.join(this.token, function() {
 
+            self.game.setUsers(Object.keys(self.users));
+
             // let user know they are in
             user.emit('state', {
                 type: 'joined',
@@ -78,6 +80,8 @@ _.extend(Room.prototype, {
 
         // remove user
         user.leave(this.token, function() {
+
+            self.game.setUsers(Object.keys(self.users));
 
             // let user know they left
             user.emit('state', {

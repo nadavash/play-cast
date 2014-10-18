@@ -1,95 +1,102 @@
-var Log = require('../logger.js');
+var Log = require('../logger.js'),
+	_ = require('lodash');
 
-module.exports TicTacToe;
+module.exports = TicTacToe;
 
 function TicTacToe() {
-	var EMPTY = 0;
-
-	this.gameBoard = [
-		[0, 0, 0],
-		[0, 0, 0],
-		[0, 0, 0],
+	this.board = [
+		[undefined,undefined,undefined],
+		[undefined,undefined,undefined],
+		[undefined,undefined,undefined]
 	];
+	this.maxPlayers = 2;
+	this.minPlayers = 2;
+	this.players = [];
+	this.finished = false;
 
-	this.currentPlayer = 0;
+	this.count = 0;
+}
 
-	this.turns = 0;
+_.extend(TicTacToe.prototype, {
 
-	var winner;
+	update: function(move, user, callback) {
+		if (this.players.length !== this.maxPlayers) {
+			return callback("You can only have two players.");
+		}
 
-	this.get = function(position) {
-		return gameBoard[position.x, position.y];
-	}
+		if (this.get(move) !== undefined) {
+			return callback("There is already a piece there.");
+		}
 
-	this.set = function(position, value) {
-		gameBoard[position.x, position.y] = value;
-	}
+		Log.info('count:', this.count, this.count % 2);
+		if (user.id !== this.players[this.count % 2]) {
+			return callback("Now is not your turn.");
+		}
 
-	this.getCurrentPlayer = function() {
-		return this.currentPlayer + 1;
-	}
+		this.set(move, this.count % 2);
 
-	function checkWinner(gameBoard) {
+		this.winner = this.checkWinner();
+		this.finished = !!this.winner || ++this.count === 9;
+
+		return callback(null, this.getState());
+	},
+
+	getState: function() {
+		return {
+			board: this.board,
+			winner: this.winner,
+			finished: this.finished,
+			turn: this.players[this.count]
+		};
+	},
+
+	checkWinner: function() {
+		var gameBoard = this.board;
+
 		// check horizontal
-		for (int i = 0; i < gameBoard.size; ++i) {
+		for (var i = 0; i < gameBoard.size; ++i) {
 			if (gameBoard[i][0] === gameBoard[i][1] &&
 				gameBoard[i][0] === gameBoard[i][2] &&
-				gameBoard[i][0] !== 0) {
-				return gameBoard[i][0];
+				gameBoard[i][0] !== undefined) {
+				return this.players[gameBoard[i][0]];
 			}
 		}
 
 		// check vertical
-		for (int i = 0; i < gameBoard.size; ++i) {
+		for (var i = 0; i < gameBoard.size; ++i) {
 			if (gameBoard[0][i] === gameBoard[1][i] &&
 				gameBoard[0][i] === gameBoard[2][i] &&
-				gameBoard[0][i] != 0) {
-				return gameBoard[0][i];
+				gameBoard[0][i] != undefined) {
+				return this.players[gameBoard[0][i]];
 			}
 		}
 
 		// check diagonals
 		if (gameBoard[0][0] === gameBoard[1][1] &&
 			gameBoard[0][0] === gameBoard[2][2] &&
-			gameBoard[0][0] !== 0) {
-			return gameBoard[0][0];
+			gameBoard[0][0] !== undefined) {
+			return this.players[gameBoard[0][0]];
 		}
 
 		if (gameBoard[0][2] === gameBoard[1][1] &&
 			gameBoard[0][2] === gameBoard[2][0] &&
-			gameBoard[0][2] !== 0) {
-			return gameBoard[0][2];
-		}
-	}
-
-	/**
-	 * Play a single turn of tic tac toe
-	 * @param  {Object} position An x and y position object.
-	 * @return {String} Error string if an error occured.  
-	 */
-	this.play = function(position) {
-		if (this.gameOver()) {
-			return "The game is over!";
+			gameBoard[0][2] !== undefined) {
+			return this.players[gameBoard[0][2]];
 		}
 
-		if (this.get(position) == EMPTY) {
-			this.set(position, this.getCurrentPlayer());
-			++this.turns;
-		} else {
-			return "This block is already filled; pick another one";
-		}
+		return null;
+	},
 
-		this.winner = checkWinner();
+	setUsers: function(players) {
+		Log.info('adding players', players, players.length, this.maxLength);
+		this.players = players;
+	},
+
+	get: function(pos) {
+		return this.board[pos.x][pos.y];
+	},
+
+	set: function(pos, value) {
+		this.board[pos.x][pos.y] = value;
 	}
-
-	this.getWinner = function() {
-		if (this.winner) {
-			return winner;
-		}
-	}
-
-	this.gameOver = function() {
-		return this.winner || this.turns === 9;
-	}
-
-}
+});
