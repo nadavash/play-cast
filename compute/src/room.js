@@ -22,11 +22,11 @@ _.extend(Room.prototype, {
      * @param {Data}
      */
     broadcast: function(data) {
-        io.sockets.in(room.token).emit(data);
+        io.sockets.in(room.token).send(data);
     },
 
     notifyRest: function(data, user) {
-        user.broadcast.to(this.token).emit(data);
+        user.broadcast.to(this.token).send(data);
     },
 
     /**
@@ -34,14 +34,15 @@ _.extend(Room.prototype, {
      * @param {Socket} user
      */
     add: function(user) {
-        this.user[user.id] = user;
+        this.users[user.id] = user;
 
+        var self = this;
         user.join(this.token, function() {
-            user.emit({
+            user.send({
                 type: 'joined',
                 data: {
                     message: 'Room joined.',
-                    token: room.token
+                    token: self.token
                 }
             });
         });
@@ -54,12 +55,13 @@ _.extend(Room.prototype, {
     remove: function(user) {
         delete this.users[user.id];
 
+        var self = this;
         user.leave(this.token, function() {
-            user.emit({
+            user.send({
                 type: 'left',
                 data: {
                     message: 'Room left.',
-                    token: room.token
+                    token: self.token
                 }
             });
         });
