@@ -18,9 +18,8 @@
                     game: game
                 }
             });
-            socket.on('state', function handler(evt) {
+            socket.once('state', function handler(evt) {
                 if (evt.type === 'hosted') {
-                    socket.off('state', handler);
                     isLoggedIn = true;
                     isHost = true;
                     room = evt.data.token;
@@ -38,9 +37,8 @@
                     token: r
                 }
             });
-            socket.on('state', function handler(evt) {
+            socket.once('state', function handler(evt) {
                 if (evt.type === 'joined') {
-                    socket.off('state', handler);
                     isLoggedIn = true;
                     isHost = false;
                     room = r;

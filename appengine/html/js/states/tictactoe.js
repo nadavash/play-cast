@@ -3,9 +3,10 @@
     window.Tictactoe = {
         init: function() {
             var socket = ConnectionManager.getUser();
+            console.log('adding tictactoe');
+            socket.on('update', stateHandler);
 
             $('.cover').load('/tictactoe', function() {
-                socket.on('update', stateHandler);
 
                 $('.cover .square')
                     .on('click', function(evt) {
@@ -20,6 +21,7 @@
         cleanup: function() {
             var socket = ConnectionManager.getUser();
 
+            console.log('removing tictactoe');
             socket.off('update', stateHandler);
             $('.cover').html('');
         }

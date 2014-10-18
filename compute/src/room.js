@@ -88,9 +88,12 @@ _.extend(Room.prototype, {
         // remove user
         user.leave(this.token, function() {
 
-        self.game.setUsers(Object.keys(self.users));
+            self.game.setUsers(Object.keys(self.users));
+            var count = self.game.players.length;
 
-        var count = self.game.players.length;
+            user.emit('state', {
+                type: 'left'
+            });
 
             if (count > self.game.maxPlayers || count < self.game.minPlayers) {
                 self.broadcast('state', {

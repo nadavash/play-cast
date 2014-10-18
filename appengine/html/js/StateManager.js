@@ -47,6 +47,8 @@
                     throw "oh";
             }
 
+            console.log('going to', state);
+
             state = states[state];
 
             if (!state) throw "uhoh";
