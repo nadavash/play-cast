@@ -11,6 +11,21 @@ html, body {
 	margin-right: 20px;
 }
 
+.left-align {
+	text-align: left;
+}
+
+/* game selection */
+.game-title {
+	font-size: 120%;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.game-container .row {
+	margin-bottom: 30px;
+}
+
 /* spinning loader */
 .windows8 {
 	margin: 20px auto;
