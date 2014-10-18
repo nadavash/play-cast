@@ -16,3 +16,6 @@ Send your host code to your friends and tell them to select "Join" from the home
 
 Once your friends have entered your host code and the required number of players for the game has been reached, the game will automatically begin. You are now playing a real-time game together!
 ![tictactoe](/screenshots/tictactoe.png?raw=true)
+
+## Future
+Chromecast streaming, four player card games and other additional games, user logins, bug fixes. 

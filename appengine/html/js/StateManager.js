@@ -42,6 +42,7 @@
                     break;
 
                 case 'gameover': // ended a game
+                    console.log("winner id: " + evt.data.winner);
                 case 'left': // left a room
                     window.ConnectionManager.leave();
 
