@@ -15,3 +15,7 @@ html, body {
 .windows8 {
 	margin: 20px auto;
 }
+
+input {
+	color: black;
+}

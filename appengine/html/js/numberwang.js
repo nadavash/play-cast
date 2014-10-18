@@ -2,13 +2,13 @@
 
     window.Numberwang = {
         init: function() {
-            $('.cover').load('numberwang.html');
-            socket.on('update', stateHandler);
+            $('.cover').load('/numberwang', function() {
+                socket.on('update', stateHandler);
 
-            $('.cover form').on('submit', function() {
-
-                socket.emit('move', {
-                    guess: parseInt(jQuery('#number').text(), 10)
+                $('.cover button').on('click', function(evt) {
+                    socket.emit('move', {
+                        guess: parseInt(jQuery('.cover input').val(), 10)
+                    });
                 });
             });
         },
