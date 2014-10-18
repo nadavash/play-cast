@@ -1,6 +1,7 @@
 var io = require('./src/io.js'),
     Log = require('./src/logger.js'),
-    Room = require('./src/room.js');
+    Room = require('./src/room.js'),
+    games = require('./src/games.js');
 
 var users = {},
     rooms = {},
@@ -24,7 +25,7 @@ io.on('connection', function(user) {
         }
         return;
 
-        Log.error('unknow role:', data.role);
+        Log.error('unknown role:', data.role);
     });
 
     // user moves
@@ -43,7 +44,8 @@ io.on('connection', function(user) {
 
         Log.info('user ' + user.id + ' does move:', data);
 
-        room.game.update(data, function(err, state) {
+        room.game.update(data, user, function(err, state) {
+            // not your turn!
             if (err) {
                 user.send({
                     type: 'error',
@@ -52,6 +54,15 @@ io.on('connection', function(user) {
                     }
                 })
                 return;
+            }
+
+            // game over
+            if (this.finished) {
+                room.broadcast('state', {
+                    type: 'gameover',
+                    data: state
+                })
+                return
             }
 
             room.broadcast('update', {
@@ -67,12 +78,23 @@ var userProtocol = {
     /**
      * Start hosting a game
      */
-    'host': function(user) {
-        Log.info('user wants host:', user.id);
+    'host': function(user, data) {
+        Log.info('user ' + user.id + ' wants host:', data.game);
 
-        var room = new Room(user);
+        var Game = games[data.game];
+
+        if (!Game) {
+            user.send({
+                type: 'error',
+                data: {
+                    message: "Game not found"
+                }
+            })
+        }
+
+        var room = new Room(user, new Game());
         rooms[room.token] = room;
-        userRoomsMap[user.id] = room;
+        userRoomMap[user.id] = room;
     },
 
     /**
@@ -106,7 +128,7 @@ var userProtocol = {
         }
 
         room.add(user);
-        userRoomsMap[user.id] = room;
+        userRoomMap[user.id] = room;
     },
 
     /**
@@ -138,6 +160,6 @@ var userProtocol = {
         }
 
         room.remove(user);
-        delete userRoomsMap[user.id];
+        delete userRoomMap[user.id];
     }
 }
