@@ -97,5 +97,20 @@
 		<script src="javascript/docs.min.js"></script>
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 		<script src="javascript/ie10-viewport-bug-workaround.js"></script>
+		<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+		<script>
+			var socket = io.connect('http://localhost:3000');
+			socket.on('update', function(evt) {
+					console.log('[UPDATE]', evt.data);
+				})
+				.on('state', function(evt) {
+					console.log('[STATE]', evt.data);
+				})
+
+			socket.send({
+				type: 'host',
+				role: 'user'
+			});
+		</script>
 	</body>
 </html>
