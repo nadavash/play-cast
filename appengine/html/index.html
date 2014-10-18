@@ -44,6 +44,24 @@
 
 		</div>
 
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h4 class="modal-title" id="myModalLabel">Error!</h4>
+					</div>
+					<div class="modal-body">
+						The program had a massive heart attack!
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Continue</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<!-- Bootstrap core JavaScript
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
@@ -63,11 +81,19 @@
 
 		<script src="javascript/StateManager.js"></script>
 		<script src="javascript/ConnectionManager.js"></script>
+		<script src="javascript/alert.js"></script>
 
 		<script src="http://localhost:3000/socket.io/socket.io.js"></script>
 		<script>
 
 			$(function() {
+				/* check cover height */
+				var contentH = $('body').height();
+				var windowH = $(window).height();
+				if (contentH > windowH) {
+					$('.mastfoot').css('position', 'inherit');
+				}
+
 				StateManager.goto({
 					type: 'start'
 				});

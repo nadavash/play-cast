@@ -19,7 +19,7 @@
 
                 $('.home-return').click(function() {
                     window.StateManager.goto({
-                        type: 'start'
+                        type: 'left'
                     });
                 });
             });

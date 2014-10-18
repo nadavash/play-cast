@@ -24,6 +24,11 @@ html, body {
 	margin-bottom: 40px;
 }
 
+.modal-dialog {
+	color: #555;
+}
+
+/* home button */
 .home-return {
 	width: 40px;
 	position: absolute;
