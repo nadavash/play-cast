@@ -29,6 +29,10 @@ _.extend(Numberwang.prototype, {
         callback(null, this.getState());
     },
 
+    setUsers: function() {
+
+    },
+
     /**
      * Returns the current state of the game
      */
