@@ -4,5 +4,15 @@ runtime: go
 api_version: go1
 
 handlers:
+- url: /stylesheets
+  static_dir: html/css
+
+- url: /javascript
+  static_dir: html/js
+
+- url: /(.*\.(gif|png|jpg))$
+  static_files: html/img/\1
+  upload: html/img/.*\.(gif|png|jpg)$
+
 - url: /.*
   script: _go_app
