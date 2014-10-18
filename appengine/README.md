@@ -3,16 +3,16 @@ PlayCast is a real-time gaming web application developed by Nick Clawson, Nedav 
 
 ## How to play
 To begin gaming, open up a browser on your device of choice and navigate to "www.play-cast.appspot.com". You will be presented with two options: "Host" or "Join".
-![blah](/screenshots/welcome.png?raw=true)
+![welcome](/screenshots/welcome.png?raw=true)
 
 If you would like to host a game lobby, select "Host". You will be presented with a list of games to select from. WARNING: Some games have not been implemented yet.
-![ya](/screenshots/host.png?raw=true)
+![host](/screenshots/host.png?raw=true)
 
 Choose a game. If the game is multiplayer, you will be presented with an "invalid number of players" page and a host code. This host code is how other players can connect to your hosted game.
-![hm](/screenshots/waiting.png?raw=true)
+![waiting](/screenshots/waiting.png?raw=true)
 
 Send your host code to your friends and tell them to select "Join" from the home page and enter your host code.
-![yass](/screenshots/join.png?raw=true)
+![join](/screenshots/join.png?raw=true)
 
 Once your friends have entered your host code and the required number of players for the game has been reached, the game will automatically begin. You are now playing a real-time game together!
-![noo](/screenshots/tictactoe.png?raw=true)
+![tictactoe](/screenshots/tictactoe.png?raw=true)
