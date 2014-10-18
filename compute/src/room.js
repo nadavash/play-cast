@@ -17,7 +17,7 @@ function Room(host, game) {
     this.add(host);
 
     this.host.emit('state', {
-        type: 'joined',
+        type: 'hosted',
         data: {
             message: "Hosting room.",
             token: this.token
