@@ -1,6 +1,6 @@
 (function() {
 
-    window.Numberwang = {
+    window.Tictactoe = {
         init: function() {
             $('.cover').load('/tictactoe', function() {
                 socket.on('update', stateHandler);
