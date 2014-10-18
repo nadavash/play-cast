@@ -67,3 +67,26 @@ html, body {
 input {
 	color: black;
 }
+
+.board {
+	margin: 10px auto;
+}
+
+.board .square {
+	width: 100px;
+	height: 100px;
+	background-color: white;
+	border: solid black 1px;
+}
+
+.square.x {
+	background-color: red;
+}
+
+.square.o {
+	background-color: blue;
+}
+
+.board {
+
+}
