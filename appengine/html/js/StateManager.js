@@ -51,7 +51,7 @@
 
             if (!state) throw "uhoh";
             if (oldState) oldState.cleanup();
-            state.init();
+            state.init(evt.data);
             oldState = state;
         }
     }
