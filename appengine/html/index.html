@@ -63,15 +63,12 @@
 				});
 				$('.btn-host').click(function() {
 					wipe('/host', function() {
-						console.log('content replaced');
 						$('.row').click(function() {
 							var game = $(this).attr('data-game');
 							console.log('game = ' + game);
 							gameSelect(game);
 						});
 					});
-
-
 				});
 
 				function wipe(content, done) {
