@@ -16,6 +16,12 @@
                         type: 'picking'
                     });
                 });
+
+                $('.home-return').click(function() {
+                    window.StateManager.goto({
+                        type: 'start'
+                    });
+                });
             });
         },
 

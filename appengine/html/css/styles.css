@@ -15,14 +15,26 @@ html, body {
 	text-align: left;
 }
 
-.tooltip-help {
-	width: 20px;
-	position: absolute;
-}
-
 .form-control {
 	width: auto;
 	margin: 0 auto;
+}
+
+#host-code {
+	margin-bottom: 40px;
+}
+
+.home-return {
+	width: 40px;
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	opacity: .8;
+}
+
+.home-return:hover {
+	cursor: pointer;
+	opacity: 1;
 }
 
 /* game selection */
