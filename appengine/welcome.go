@@ -11,7 +11,8 @@ func init() {
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/join", joinHandler)
 	http.HandleFunc("/host", hostHandler)
-	http.HandleFunc("/numberwang", numberHandler);
+	http.HandleFunc("/numberwang", numberHandler)
+	http.HandleFunc("/tictactoe", tictactoeHandler)
 }
 
 func displayTemplate(htmlTmp string, w http.ResponseWriter, r *http.Request) {
@@ -36,4 +37,8 @@ func hostHandler(w http.ResponseWriter, r *http.Request) {
 
 func numberHandler(w http.ResponseWriter, r *http.Request) {
 	displayTemplate("html/numberwang.html", w, r)
+}
+
+func tictactoeHandler(w http.ResponseWriter, r *http.Request) {
+	displayTemplate("html/tictactoe.html", w, r)
 }
