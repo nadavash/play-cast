@@ -62,31 +62,34 @@
 					wipe('/join');
 				});
 				$('.btn-host').click(function() {
-					wipe('/host');
+					wipe('/host', function() {
+						console.log('content replaced');
+						$('.row').click(function() {
+							var game = $(this).attr('data-game');
+							console.log('game = ' + game);
+							gameSelect(game);
+						});
+					});
+
+
 				});
 
-				function wipe(content) {
-					$('.cover').load(content);
+				function wipe(content, done) {
+					$('.cover').load(content, done);
 				}
 			});
 		</script>
 
 		<script src="http://localhost:3000/socket.io/socket.io.js"></script>
 		<script>
-			var socket = io.connect('http://localhost:3000');
-			socket.on('update', function(evt) {
-					console.log('[UPDATE]', evt.data);
-				})
-				.on('state', function(evt) {
-					console.log('[STATE]', evt.data);
-				})
+			function gameSelect(gameName) {
+				var obj = {
+					'tictactoe': window.TicTacToe,
+					'numberwang': window.numberwang
+				};
+				obj[gameName].init();
+			}
 
-			socket.send({
-				type: 'host',
-				data: {
-					game: 'numberwang'
-				}
-			});
 		</script>
 	</body>
 </html>

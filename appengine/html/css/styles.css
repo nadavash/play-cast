@@ -22,8 +22,19 @@ html, body {
 	margin-bottom: 10px;
 }
 
+.img-col {
+	padding-left: 0;
+}
+
 .game-container .row {
 	margin-bottom: 30px;
+	background-color: rgba(255, 255, 255, .2);
+	opacity: .8;
+}
+
+.game-container .row:hover {
+	opacity: 1;
+	cursor: pointer;
 }
 
 /* spinning loader */
