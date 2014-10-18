@@ -20,6 +20,11 @@ html, body {
 	position: absolute;
 }
 
+.form-control {
+	width: auto;
+	margin: 0 auto;
+}
+
 /* game selection */
 .game-title {
 	font-size: 120%;
