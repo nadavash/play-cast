@@ -12,7 +12,7 @@ func init() {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	tmpl, err := template.ParseFiles("welcome.html")
+	tmpl, err := template.ParseFiles("html/index.html")
 	if (err != nil) {
 		fmt.Fprint(w, err.Error())
 	}
