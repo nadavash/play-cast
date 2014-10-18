@@ -1,6 +1,6 @@
 (function() {
 
-    var url = 'http://localhost:3000';
+    var url = 'http://146.148.56.132:3000/';
 
     var socket = null,
         isLoggedIn = false,
