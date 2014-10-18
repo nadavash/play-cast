@@ -1,4 +1,5 @@
-var _ = require('lodash');
+var _ = require('lodash'),
+    io = require('./io.js');
 
 module.exports = Room;
 
@@ -7,26 +8,32 @@ module.exports = Room;
  * @constructor
  * @param {Socket} host
  */
-function Room(host) {
+function Room(host, game) {
     this.token = _.uniqueId('r');
     this.host = host;
+    this.game = game;
 
     this.users = {};
     this.add(host);
+
+    this.host.emit('state', {
+        type: 'joined',
+        data: {
+            message: "Hosting room.",
+            token: this.token
+        }
+    });
 }
 
 _.extend(Room.prototype, {
 
     /**
      * Send a message to everyone in the room
+     * @param {Type}
      * @param {Data}
      */
-    broadcast: function(data) {
-        io.sockets.in(room.token).send(data);
-    },
-
-    notifyRest: function(data, user) {
-        user.broadcast.to(this.token).send(data);
+    broadcast: function(type, data) {
+        io.sockets.in(this.token).emit(type, data);
     },
 
     /**
@@ -37,12 +44,24 @@ _.extend(Room.prototype, {
         this.users[user.id] = user;
 
         var self = this;
+
+        // add user
         user.join(this.token, function() {
-            user.send({
+
+            // let user know they are in
+            user.emit('state', {
                 type: 'joined',
                 data: {
                     message: 'Room joined.',
                     token: self.token
+                }
+            });
+
+            // broadcast new room size
+            self.broadcast('update', {
+                type: 'users',
+                data: {
+                    count: Object.keys(self.users).length
                 }
             });
         });
@@ -56,12 +75,24 @@ _.extend(Room.prototype, {
         delete this.users[user.id];
 
         var self = this;
+
+        // remove user
         user.leave(this.token, function() {
-            user.send({
+
+            // let user know they left
+            user.emit('state', {
                 type: 'left',
                 data: {
                     message: 'Room left.',
                     token: self.token
+                }
+            });
+
+            // broadcast new room size
+            self.broadcast('update', {
+                type: 'users',
+                data: {
+                    count: Object.keys(self.users).length
                 }
             });
         });
