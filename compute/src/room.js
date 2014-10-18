@@ -12,6 +12,7 @@ module.exports = Room;
 function Room(host, game) {
     this.token = uniqueId('r');
     this.host = host;
+    this.spectator = null;
     this.game = game;
 
     this.users = {};
@@ -108,6 +109,42 @@ _.extend(Room.prototype, {
             } else {
                 // nothing?
             }
+        });
+    },
+
+    /**
+     * Adds a passive spectator
+     * @param {Socket} spectator
+     * @param {Function} callback
+     */
+    setSpectator: function(spectator, callback) {
+        this.spectator = spectator;
+
+        var self = this;
+        spectator.join(this.token, function() {
+
+            var count = self.game.players.length;
+
+            if (count > self.game.maxPlayers || count < self.game.minPlayers) {
+                Log.warn(self.token);
+                self.broadcast('state', {
+                    type: 'waiting',
+                    data: {
+                        count: count,
+                        room: self.token,
+                        max: self.game.maxPlayers,
+                        min: self.game.minPlayers
+                    }
+                })
+            } else {
+                self.broadcast('state', {
+                    type: 'joined',
+                    data: {
+                        game: self.game.name
+                    }
+                })
+            }
+
         });
     }
 });

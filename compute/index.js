@@ -72,6 +72,17 @@ io.on('connection', function(user) {
         });
     });
 
+    user.on('watch', function(evt) {
+        var room = rooms[evt.data.room];
+
+        if (!room) {
+
+            return;
+        }
+
+        room.setSpectator(user);
+    });
+
     user.on('disconnect', function() {
         Log.warn('user ' + user.id + ' disconnected');
         delete users[user.id];
