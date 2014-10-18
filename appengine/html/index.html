@@ -55,6 +55,8 @@
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 		<script src="javascript/ie10-viewport-bug-workaround.js"></script>
 		<script src="javascript/numberwang.js"></script>
+		<script src="javascript/tictactoe.js"></script>
+
 
 		<script type="text/javascript">
 			$(function() {
@@ -83,9 +85,17 @@
 		<script src="http://localhost:3000/socket.io/socket.io.js"></script>
 		<script>
 			function gameSelect(gameName) {
+				socket = io.connect('http://localhost:3000')
+				socket.emit('message', {
+					type: 'host',
+					data: {
+						game: gameName
+					}
+				});
+
 				var obj = {
-					'tictactoe': window.TicTacToe,
-					'numberwang': window.numberwang
+					'tictactoe': window.Tictactoe,
+					'numberwang': window.Numberwang
 				};
 				obj[gameName].init();
 			}
