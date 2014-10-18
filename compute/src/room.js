@@ -20,7 +20,8 @@ function Room(host, game) {
         type: 'hosted',
         data: {
             message: "Hosting room.",
-            token: this.token
+            token: this.token,
+            game: this.game.name
         }
     });
 }

@@ -2,6 +2,8 @@
 
     window.Numberwang = {
         init: function() {
+            var socket = ConnectionManager.getUser();
+
             $('.cover').load('/numberwang', function() {
                 socket.on('update', stateHandler);
 
@@ -14,6 +16,8 @@
         },
 
         cleanup: function() {
+            var socket = ConnectionManager.getUser();
+
             socket.off('update', stateHandler);
             $('.cover').html('');
         }

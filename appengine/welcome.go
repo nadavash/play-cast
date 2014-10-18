@@ -13,6 +13,7 @@ func init() {
 	http.HandleFunc("/host", hostHandler)
 	http.HandleFunc("/numberwang", numberHandler)
 	http.HandleFunc("/tictactoe", tictactoeHandler)
+	http.HandleFunc("/start", startHandler)
 }
 
 func displayTemplate(htmlTmp string, w http.ResponseWriter, r *http.Request) {
@@ -41,4 +42,8 @@ func numberHandler(w http.ResponseWriter, r *http.Request) {
 
 func tictactoeHandler(w http.ResponseWriter, r *http.Request) {
 	displayTemplate("html/tictactoe.html", w, r)
+}
+
+func startHandler(w http.ResponseWriter, r *http.Request) {
+	displayTemplate("html/start.html", w, r)
 }
