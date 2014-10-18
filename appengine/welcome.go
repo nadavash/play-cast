@@ -9,13 +9,21 @@ import (
 
 func init() {
 	http.HandleFunc("/", handler)
+	http.HandleFunc("/join", joinHandler)
 }
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	tmpl, err := template.ParseFiles("html/index.html")
+func displayTemplate(htmlTmp string, w http.ResponseWriter, r *http.Request) {
+	tmpl, err := template.ParseFiles(htmlTmp)
 	if (err != nil) {
 		fmt.Fprint(w, err.Error())
 	}
-
     tmpl.Execute(w, nil)
+}
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	displayTemplate("html/index.html", w, r)
+}
+
+func joinHandler(w http.ResponseWriter, r *http.Request) {
+	displayTemplate("html/join.html", w, r)
 }
