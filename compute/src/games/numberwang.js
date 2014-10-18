@@ -29,7 +29,7 @@ _.extend(Numberwang.prototype, {
         callback(null, this.getState());
     },
 
-    setUser: function() {
+    setUsers: function() {
 
     },
 
