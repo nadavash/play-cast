@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="../../favicon.ico">
+
+		<title>PlayCast</title>
+
+		<!-- Bootstrap core CSS -->
+		<link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+		<!-- Custom styles for this template -->
+		<link href="/stylesheets/cover.css" rel="stylesheet" type="text/css">
+		<link href="/stylesheets/styles.css" rel="stylesheet" type="text/css">
+		<link href="/stylesheets/loader.css" rel="stylesheet" type="text/css">
+
+		<script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+	</head>
+
+	<body>
+
+		<div class="site-wrapper">
+
+			<div class="site-wrapper-inner">
+
+				<div class="cover-container">
+					<img class="home-return" src="home.png" alt="home"></img>
+
+					<div class="inner cover">
+
+					</div>
+
+					<div class="mastfoot">
+						<div class="inner">
+							<p>Powered by Dubhacks<br> <i>and coffee</i></p>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<!-- Bootstrap core JavaScript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="javascript/bootstrap.min.js"></script>
+		<script src="javascript/docs.min.js"></script>
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		<script src="javascript/ie10-viewport-bug-workaround.js"></script>
+
+		<!-- states -->
+		<script src="javascript/states/numberwang.js"></script>
+		<script src="javascript/states/tictactoe.js"></script>
+		<script src="javascript/states/join.js"></script>
+		<script src="javascript/states/wait.js"></script>
+
+		<script src="javascript/StateManager.js"></script>
+		<script src="javascript/ConnectionManager.js"></script>
+
+		<script src="http://146.148.56.132:3000/socket.io/socket.io.js"></script>
+		<script>
+			function getParameterByName(name) {
+			    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+			    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+			        results = regex.exec(location.search);
+			    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+			}
+
+			var roomId = getParameterByName('roomId');
+			ConnectionManager.joinRoom(roomId);
+		</script>
+	</body>
+</html>

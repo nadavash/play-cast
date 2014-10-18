@@ -15,6 +15,7 @@ func init() {
 	http.HandleFunc("/tictactoe", tictactoeHandler)
 	http.HandleFunc("/start", startHandler)
 	http.HandleFunc("/wait", waitHandler)
+	http.HandleFunc("/cast", castHandler)
 }
 
 func displayTemplate(htmlTmp string, w http.ResponseWriter, r *http.Request) {
@@ -51,4 +52,8 @@ func startHandler(w http.ResponseWriter, r *http.Request) {
 
 func waitHandler(w http.ResponseWriter, r *http.Request) {
 	displayTemplate("html/player-wait.html", w, r)
+}
+
+func castHandler(w http.ResponseWriter, r *http.Request) {
+	displayTemplate("html/cast.html", w, r)
 }
